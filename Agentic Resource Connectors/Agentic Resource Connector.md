@@ -1,5 +1,5 @@
 # Introducing Agentic Resource Connectors (ARC)
-[SHARED HERE](https://docs.google.com/document/d/1TW5w7s0N5Z1IirDTNDbGAyZfoksRU7im02q5eCmGH0M/edit?tab=t.0)
+
 ## Why I no longer build single-use tools or MCP servers
 
 Every AI integration you build is technical debt you'll maintain forever. I've built hundreds of them. Now I'm done.
