@@ -1,2 +1,4 @@
 zz*
-.DS_Store
+.DS_Storenode_modules/
+docs/
+.cache/

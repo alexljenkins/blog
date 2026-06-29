@@ -1,3 +1,12 @@
+---
+title: Introducing Agentic Resource Connectors (ARC)
+excerpt: One self-learning agent per system, each with a single flexible tool and a memory it writes for itself—my replacement for the sprawl of single-use tools and MCP servers.
+date: 2026-02-02
+hero: assets/ARC-agent-hero.png
+cover: assets/arc_account_researcher.png
+tags: [AI Agents]
+---
+
 # Introducing Agentic Resource Connectors (ARC)
 
 ## Why I no longer build single-use tools or MCP servers
@@ -15,9 +24,12 @@ But it hasn't felt easier.
 2026 will be the year of "humans do less." Starting with me.
 
 I'm saying no to:
-- ❌ Narrow, single-purpose AI tools that solve one problem and create three more
-- ❌ MCP servers thrown together in a day, running on some random infrastructure that goes down when you need it most
-- ❌ More scaffolding, more prompt fine-tuning, more infrastructure just to maintain control
+
+<ul class="no-list">
+<li>Narrow, single-purpose AI tools that solve one problem and create three more</li>
+<li>MCP servers thrown together in a day, running on some random infrastructure that goes down when you need it most</li>
+<li>More scaffolding, more prompt fine-tuning, more infrastructure just to maintain control</li>
+</ul>
 
 <img src="./assets/HubSpot_tools.png" style="max-height:600px; max-width:50%;" />
 
@@ -30,31 +42,35 @@ Let me show you what "tool sprawl" actually looks like with a real example.
 
 **The task:** Research a prospect and their company before an initial meeting.
 
-Simple enough, right? Here's what one of my 2025 research agents, ***Rex, The Researcher***, looks like.
+Simple enough, right? Here's the tools just one of my 2025 research agents, ***Rex, The Researcher***, had:
 
-`[PLACEHOLDER: Screenshot of your current agent with all the individual tools listed - the HubSpot and Notion specific tools]`
+<div class="tool-cols">
+<div><p class="tool-head">HubSpot tools</p>
+<ul>
+<li>Get contact details</li>
+<li>Create/Update contact details</li>
+<li>Get company details</li>
+<li>Create/Update company</li>
+<li>Create association between contact and company</li>
+</ul></div>
+<div><p class="tool-head">Notion tools</p>
+<ul>
+<li>Search pages</li>
+<li>Get page content</li>
+<li>Create page</li>
+<li>Add content block</li>
+<li>Update content block</li>
+</ul></div>
+<div><p class="tool-head">Research tools</p>
+<ul>
+<li>Search the web</li>
+<li>Extract webpage content</li>
+<li>Get LinkedIn profile</li>
+<li>Get LinkedIn Company profile</li>
+</ul></div>
+</div>
 
-That's **15+ individual tools** just for two systems:
-
-**HubSpot tools:**
-- Get contact details
-- Create/Update contact details
-- Get company details
-- Create/Update company
-- Create association between contact and company
-
-**Notion tools:**
-- Search pages
-- Get page content
-- Create page
-- Add content block
-- Update content block
-
-**Research tools:**
-- Search the web
-- Extract webpage content
-- Get LinkedIn profile
-- Get LinkedIn Company profile
+That's **14 individual tools** just for two systems and some online research!
 
 Every single one of these tools has its own description, its own parameters, its own edge cases, and its own bugs. They all get loaded into the agent's context at the start of *every* conversation—whether it needs them or not. The agent has to parse through all of this just to figure out which tool to call.
 
@@ -82,9 +98,10 @@ ARC is my implementation of where this is all heading.
 
 An ARC is an agent with a single, flexible tool that can make *any* API call to a given system. HubSpot, Notion, Salesforce, whatever. One tool. One agent. One system. That's it.
 
-<img src="./assets/relevanceai_notion_arc_tool.png" style="max-height:600px; max-width:50%;" />
-
-<img src="./assets/notion_api_call_code.png" style="max-height:600px; max-width: 50%;" />
+<div class="img-row">
+<img src="./assets/relevanceai_notion_arc_tool.png" alt="Notion ARC tool in Relevance AI" />
+<img src="./assets/notion_api_call_code.png" alt="The single API-call tool's code" />
+</div>
 
 For our ***Rex, The Researcher*** example, this one tool replaces all of the notion tools at once. Additionally, it enables us to expand the use cases without any changes to him.
 
