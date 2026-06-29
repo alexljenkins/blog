@@ -12,7 +12,7 @@ const OUT = path.join(ROOT, 'docs');
    ---------------------------------------------------------------- */
 const SITE = {
   title: 'Alex Jenkins',
-  tagline: 'Notes from the edge of agents, automation & building things that build themselves.',
+  tagline: 'Ideas from the building things that build themselves.',
   author: 'Alex Jenkins',
   url: '',
   social: [
@@ -256,7 +256,7 @@ function renderIndex(posts) {
   const body = `<div class="page-head">
     <p class="eyebrow">Writing</p>
     <h1>Blogs</h1>
-    <p>Field notes on agents, automation, and building systems that get smarter on their own.</p>
+    <p>Ideas from the building things that build themselves.</p>
   </div>
   <div class="post-list" id="post-list" data-rendered="${Math.min(PAGE_SIZE, data.length)}" data-total="${data.length}" data-batch="${PAGE_SIZE}">${initial}</div>
   <div id="scroll-sentinel" aria-hidden="true"></div>`;
@@ -338,7 +338,11 @@ function parseCV(raw) {
       if (job.quote && !job.quote.by && /^—/.test(strip(line))) { job.quote.by = strip(line).replace(/^—\s*/, ''); continue; }
       const tech = line.match(/^\*\*Technologies:\*\*\s*(.+)/);
       if (tech) { job.tech = strip(tech[1]).split(/,(?![^(]*\))/).map((s) => s.trim()).filter(Boolean); continue; }
-      if (line.startsWith('*')) job.bullets.push(strip(line));
+      if (line.startsWith('*')) {
+        const indent = rawLine.match(/^[\t ]*/)[0];
+        const depth = (indent.match(/\t/g) || []).length + Math.floor(indent.replace(/\t/g, '').length / 2);
+        job.bullets.push({ text: strip(line), depth });
+      }
       continue;
     }
 
@@ -375,8 +379,24 @@ function renderAbout() {
     else groups.push({ company: j.company, roles: [j] });
   }
 
+  const renderBullets = (items) => {
+    if (!items.length) return '';
+    let html = '<ul class="role-bullets">';
+    let depth = 0;
+    items.forEach((b, i) => {
+      if (b.depth > depth) for (let d = depth; d < b.depth; d++) html += '<ul class="role-bullets">';
+      else if (b.depth < depth) { for (let d = b.depth; d < depth; d++) html += '</li></ul>'; html += '</li>'; }
+      else if (i > 0) html += '</li>';
+      html += `<li>${esc(b.text)}`;
+      depth = b.depth;
+    });
+    html += '</li>';
+    for (let d = 0; d < depth; d++) html += '</ul></li>';
+    return html + '</ul>';
+  };
+
   const renderRole = (j) => {
-    const bullets = j.bullets.length ? `<ul class="role-bullets">${j.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>` : '';
+    const bullets = renderBullets(j.bullets);
     const tech = j.tech.length ? `<div class="role-tech">${j.tech.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : '';
     const quote = j.quote ? `<blockquote class="role-quote">${esc(j.quote.text)}${j.quote.by ? `<cite>${esc(j.quote.by)}</cite>` : ''}</blockquote>` : '';
     return `<div class="role">

@@ -9,7 +9,7 @@
 :root {
   --nav-w: 25%;
   --content: 1140px;         /* default width: list, post header, footer, chrome */
-  --measure: 970px;          /* narrower reading column for the post body */
+  --measure: 840px;          /* narrower reading column for the post body */
   --gutter: clamp(1.25rem, 4vw, 3rem);
 
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -80,12 +80,11 @@ a { color: inherit; text-decoration: none; }
   gap: 1.4rem;
   padding: 2.5rem 4.4rem;
   background-color: #131419;   /* dark fallback under the image */
-  border-right: 1px solid var(--border);
   overflow-y: auto;
 }
 
 .main {
-  margin-left: var(--nav-w);
+  margin-left: calc(var(--nav-w) - 1px);   /* tuck under the fixed sidebar to kill the sub-pixel seam */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -118,7 +117,10 @@ a { color: inherit; text-decoration: none; }
 .menu-toggle { display: none; }
 
 /* the collapsible cluster (nav + social + theme) */
-.side-menu { display: flex; flex-direction: column; gap: 1.4rem; }
+.side-menu {
+  display: flex; flex-direction: column; gap: 1.4rem;
+  margin-top: clamp(1.25rem, 5vh, 2.25rem);   /* push the cluster ~a line below the brand; squishes on short screens */
+}
 
 /* ---------- nav ---------- */
 .nav { display: flex; flex-direction: column; gap: .1rem; padding-left: .9rem; }
@@ -283,7 +285,7 @@ a { color: inherit; text-decoration: none; }
 .post-header {
   padding: clamp(2.5rem, 6vw, 4.5rem) var(--gutter) clamp(1.5rem, 3vw, 2.25rem);
 }
-.post-header-inner { max-width: var(--content); margin: 0 auto; }
+.post-header-inner { max-width: var(--measure); margin: 0 auto; }
 .post-header .eyebrow { margin-bottom: 1rem; }
 .post-header h1 {
   font-family: var(--font-serif);
@@ -374,6 +376,8 @@ a { color: inherit; text-decoration: none; }
 .prose > blockquote { margin-top: 0; }
 
 .prose > * + * { margin-top: 1.35rem; }
+/* posts that open with body text (no leading header) get a full header's worth of breathing room under the hero */
+.prose > p:first-child { margin-top: clamp(5rem, 12vw, 8rem); }
 .prose > h2 { margin-top: 2.8rem; }
 .prose > h3 { margin-top: 2rem; }
 .prose > figure + *,
@@ -420,7 +424,7 @@ a { color: inherit; text-decoration: none; }
 
 .prose ul, .prose ol { padding-left: 1.4rem; }
 .prose li { margin-top: .45rem; }
-.prose li::marker { color: var(--muted); }
+.prose li::marker { color: var(--accent); }
 
 /* opt-out list with a bold red ✕ marker (reliable color, no emoji-font dependency) */
 .prose ul.no-list { list-style: none; padding-left: 0; }
@@ -435,21 +439,30 @@ a { color: inherit; text-decoration: none; }
   font-size: 1.05em;
 }
 
-/* blockquote — breaks out slightly wider, editorial pull-quote */
+/* blockquote — body-size, italic, lightly indented */
 .prose blockquote {
   grid-column: content;
-  margin-left: calc(-1 * clamp(1rem, 3vw, 2.5rem));
-  margin-right: calc(-1 * clamp(1rem, 3vw, 2.5rem));
-  padding: .4rem 0 .4rem clamp(1.25rem, 3vw, 2rem);
+  margin-inline: 0;
+  padding: .15rem 0 .15rem clamp(1rem, 2.5vw, 1.5rem);
   border-left: 3px solid var(--accent);
 }
 .prose blockquote p {
-  font-size: clamp(1.55rem, 2.9vw, 1.8rem);
-  line-height: 1.45;
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  line-height: 1.55;
   color: var(--text);
   font-weight: 400;
+  font-style: italic;
 }
 .prose blockquote p:first-child { margin-top: 0; }
+
+/* soft-quote — the secondary, card-style pull-quote (shared with .role-quote) */
+.prose blockquote.soft-quote {
+  border-left: 0;
+  padding: 1.4rem 1.6rem 1.3rem 2.6rem;
+  margin: 1.8rem 0;
+  font-size: clamp(1.3rem, 2.7vw, 1.62rem);   /* a touch larger than body text */
+  line-height: 1.5;
+}
 
 /* inline figures / images inside prose stay within the column, centered */
 .prose figure { margin-left: 0; margin-right: 0; }
@@ -665,6 +678,7 @@ figcaption {
   .side-menu {
     display: none;
     position: absolute; top: 100%; left: 0; right: 0;
+    margin-top: 0;
     gap: 1.5rem;
     padding: 1.4rem var(--gutter) 1.7rem;
     background: rgba(17, 18, 22, .98);   /* dark so the forced-white text stays readable */
@@ -866,34 +880,27 @@ figcaption {
 .role-title {
   font-family: var(--font-sans);
   font-weight: 700;
-  font-size: 1.18rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);   /* ~2px above body; weight carries the separation */
+  line-height: 1.1;
   letter-spacing: -.01em;
   color: var(--text);
   margin: 0 0 1rem;
 }
-.role-bullets { list-style: none; padding: 0; margin: 0; }
+.role-bullets { list-style: disc; padding-left: 1.4rem; margin: 0; }
 .role-bullets li {
-  position: relative;
-  padding-left: 1.3rem;
-  margin-top: .6rem;
-  font-family: var(--font-sans);
-  font-size: 1.04rem;
-  line-height: 1.55;
+  margin-top: .7rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  line-height: 1.72;
   color: var(--text-soft);
 }
-.role-bullets li::before {
-  content: "";
-  position: absolute;
-  left: 0; top: .62em;
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  opacity: .5;
-}
+.role-bullets li::marker { color: var(--accent); }
+.role-bullets .role-bullets { margin-top: 0; padding-left: 2.4rem; }
+.role-bullets .role-bullets li { margin-top: 0; line-height: 1.4; }
 .role-tech { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.2rem; }
 
-/* the testimonial — pinned to the bottom of each role, made to pop */
-.role-quote {
+/* card-style quote — testimonial on roles, secondary pull-quote in prose */
+.role-quote, .soft-quote {
   position: relative;
   margin: 1.6rem 0 0;
   padding: 1.5rem 1.6rem 1.4rem 2.6rem;
@@ -905,7 +912,7 @@ figcaption {
   line-height: 1.45;
   color: var(--text);
 }
-.role-quote::before {
+.role-quote::before, .soft-quote::before {
   content: "\201C";
   position: absolute;
   left: .55rem; top: .35rem;

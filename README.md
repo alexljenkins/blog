@@ -1,5 +1,5 @@
 # Personal Blog
 
-Notes from the edge of agents, automation, and building things that improve themselves.
+Ideas from the building things that build themselves.
 
 **→ Read it live: [alexljenkins.github.io/blog](https://alexljenkins.github.io/blog/)**

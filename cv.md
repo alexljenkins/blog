@@ -63,12 +63,10 @@
 *"Alex turned a customer looking likely to churn into one whom we're talking to about multiple use cases and building out a workforce. Wonderful work\!" — Dan Palmer, Co-founder & Head of PLG*
 
 * Managed the end-to-end lifecycle of custom AI systems from concept to production (and beyond) for 7 concurrent enterprise clients; deployed production-grade L1–L4 multi-agent workflows executing 250k+ tasks monthly across sales, support, and data.
-
 * Owned the end-to-end product strategy and execution for the builder’s template ecosystem. Resulting in:  
-* 5-12 hour delivery from user discovery to live production-deployed product solutions  
-* 250+ personally engineered AI tools, capturing 33% of all asset downloads within 5 months  
-* 42% higher stickiness rate for the self-serve onboarding flow, outperforming every other user journey path on the platform.
-
+	* 5-12 hour delivery from user discovery to live production-deployed product solutions  
+	* 250+ personally engineered AI tools, capturing 33% of all asset downloads within 5 months  
+	* 42% higher stickiness rate for the self-serve onboarding flow, outperforming every other user journey path on the platform.
 * Experimented with ideas for various next-gen multi-agent architectures, developing and testing architectures including; collaborative non-linear agentic canvas, Model Relevance Protocol (MRP) and Agentic Resource Connectors (ARCs) designed for seamless, zero-config, self-improving integration experience that ‘just works’.
 
 **Technologies:** Relevance AI, Claude, Codex, TypeScript (Node, React & Vue), PostHog, APIs, MCPs.
@@ -81,10 +79,9 @@
 *— Ray Jokhan, Chief Commercial Officer*
 
 * Lead data scientist for the project to rewrite the $4.6 billion home loan formula. Resulting in:  
-* 34% of home loans now auto-processed (previously 0%)  
-* 48% increased loan specialist's processing volume through 53+ automated data validators  
-* 32% reduced time to unconditional approval for customers (a core conversion metric).
-
+	* 34% of home loans now auto-processed (previously 0%)  
+	* 48% increased loan specialist's processing volume through 53+ automated data validators  
+	* 32% reduced time to unconditional approval for customers (a core conversion metric).
 * Refactored a legacy transaction prediction codebase of over 6,000 lines of code. Enhancing it to become a core pillar of the bank's new 'Money Systems' feature. Additionally; removed bugs, added unit tests, increased visibility via a dashboard and developed a CI-CD pipeline.  
 * Ran multiple data spikes over 450m rows of data to find, analyse, validate, present and report on key business questions to drive data-driven decisions. Including; finding fraudulent transactions in real-time, analysing abusive transactions/users and validating potential product features against customer, service center and cost vertices.  
 * Developed and mentored junior data engineers and analysts while augmenting workloads during delivery crunch. For example, built the core ELT codebase for inbound data ingestion to Databricks, enabling analysts to build dashboards and deliver value fast.
@@ -137,9 +134,9 @@
 
 * Spearheaded the strategic development of the company's first software as a service (SaaS) offering a comprehensive literacy education platform for teachers now used by 17,000 teachers.  
 * Led sales, and marketing for 3-years for all online products, achieving:  
-* $3 million revenue p.a. (30% of total company revenue)  
-* 60%+ profit margin (130% greater than legacy offerings)  
-* 15,000 annual subscriptions (3x that of offline products).
+	* $3 million revenue p.a. (30% of total company revenue)  
+	* 60%+ profit margin (130% greater than legacy offerings)  
+	* 15,000 annual subscriptions (3x that of offline products).
 
 # Side Projects
 
