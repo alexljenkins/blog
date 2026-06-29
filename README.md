@@ -1,3 +1,5 @@
-# Blogs
+# Personal Blog
 
-1. [Agentic Resource Connector](./Agentic%20Resource%20Connectors/Agentic%20Resource%20Connector.md)
+Notes from the edge of agents, automation, and building things that improve themselves.
+
+**→ Read it live: [alexljenkins.github.io/blog](https://alexljenkins.github.io/blog/)**
